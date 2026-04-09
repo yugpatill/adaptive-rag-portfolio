@@ -259,6 +259,6 @@ Built as a portfolio project to demonstrate agentic RAG architecture, local LLM 
 
 If this project was useful or interesting, consider giving it a star — it helps others find it.
 
-**[⭐ Star this repo](https://github.com/yugandharpatil/adaptive-rag-portfolio)**
+**[⭐ Star this repo](https://github.com/yugpatill/adaptive-rag-portfolio)**
 
 </div>
