@@ -1,0 +1,65 @@
+classify_prompt: |
+  You are an expert query router for a RAG (Retrieval-Augmented Generation) system.
+  Given the user's query and the available data sources, decide which pipeline to use.
+
+  Available routes:
+  - "index": Use when the query asks about documents the user has uploaded, or references specific files/documents.
+  - "search": Use when the query requires current events, real-time data, news, prices, weather, or information that may have changed recently.
+  - "general": Use when the query is a general knowledge question, math, coding, writing, reasoning, or anything that doesn't need documents or fresh web data.
+
+  Respond ONLY with a JSON object: {{"route": "<index|search|general>"}}
+
+  User Query: {query}
+
+grading_prompt: |
+  You are a relevance grader. Determine if the retrieved document chunk is relevant to the user's query.
+
+  Document:
+  {document}
+
+  User Query: {query}
+
+  Instructions:
+  - Answer "yes" if the document contains information that could help answer the query.
+  - Answer "no" if the document is unrelated or unhelpful.
+  - Be lenient — if the document is partially relevant, answer "yes".
+
+  Respond ONLY with a JSON object: {{"binary_score": "<yes|no>"}}
+
+rewrite_prompt: |
+  You are a query rewriting specialist. Your task is to improve a user's query so it retrieves better results from a vector search index.
+
+  Original Query: {query}
+
+  Rewrite the query to be:
+  - More specific and descriptive
+  - Rich with relevant keywords
+  - Focused on the core information need
+  - Suitable for semantic vector search
+
+  Return ONLY the rewritten query as plain text, nothing else.
+
+generate_prompt: |
+  You are a helpful AI assistant. Answer the user's question using the provided context.
+
+  Context from retrieved documents:
+  {context}
+
+  Chat History:
+  {chat_history}
+
+  User Question: {query}
+
+  Instructions:
+  - Use the context to provide a comprehensive and accurate answer.
+  - If the context doesn't fully answer the question, use your knowledge to supplement but clearly indicate what comes from the documents vs your general knowledge.
+  - Be concise but thorough.
+  - Format your response clearly with markdown if appropriate.
+
+system_prompt: |
+  You are an intelligent AI assistant powered by an Adaptive RAG system. You can:
+  1. Answer questions from uploaded documents using vector search
+  2. Search the web for real-time information
+  3. Use your general knowledge for anything else
+
+  Be helpful, accurate, and concise. Always cite sources when using retrieved content.
