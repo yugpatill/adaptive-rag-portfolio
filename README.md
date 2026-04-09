@@ -129,7 +129,7 @@ adaptive-rag-portfolio/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yugandharpatil/adaptive-rag-portfolio.git
+git clone https://github.com/yugpatill/adaptive-rag-portfolio.git
 cd adaptive-rag-portfolio
 ```
 
